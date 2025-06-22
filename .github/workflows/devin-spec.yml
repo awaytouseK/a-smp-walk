@@ -1,0 +1,15 @@
+name: Devin – Spec & Tasks
+
+on:
+  issues:
+    types: [labeled]               # “ラベルが付いたとき” に起動
+
+jobs:
+  devin_spec:
+    if: contains(github.event.label.name, 'ready-for-dev')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: cognition-labs/devin-action@v1
+        with:
+          devin-api-key: ${{ secrets.DEVIN_API_KEY }}
+          mode: 'spec-and-tasks'  # 仕様書とタスク Issue を生成
